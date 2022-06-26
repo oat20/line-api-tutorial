@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LIFF - LINE Front-end Framework</title>
+    <style>
+        body {
+            margin: 16px
+        }
+
+        button,
+        img {
+            display: none;
+            width: 25%;
+            border-radius: 50px;
+        }
+
+        button {
+            padding: 16px
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Page 2</h1>
+    
+    <img id="pictureUrl">
+	<p id="userId"></p>
+	<p id="userEmail"></p>
+    <p id="displayname"></p>
+    <p id="statusMsg"></p>
+
+    <button id="btnLogIn" onclick="logIn()">Log In</button>
+    <button id="btnLogOut" onclick="logOut()">Log Out</button>
+
+    <script src="https://static.line-scdn.net/liff/edge/versions/2.8.0/sdk.js"></script>
+    <script>
+        function logOut() {
+            liff.logout()
+            window.location.reload()
+        }
+        function logIn() {
+            liff.login({ redirectUri: window.location.href })
+            /*liff.login(
+                { rediretUri : 'https://doc.ph.mahidol.ac.th/lineliff' }
+            );*/
+        }
+        async function getUserProfile() {
+            const profile = await liff.getProfile()
+            document.getElementById("pictureUrl").style.display = "block"
+            document.getElementById("pictureUrl").src = profile.pictureUrl
+			document.getElementById("userId").append(profile.userId)
+			//document.getElementById("userEmail").append(liff.getDecodedIDToken().email)
+			document.getElementById("userEmail").innerHTML = '<strong>Email</strong> ' + liff.getDecodedIDToken().email;
+            document.getElementById("displayname").append(profile.displayName)
+            document.getElementById("statusMsg").append(profile.statusMessage)
+			
+        }
+        async function main() {
+            await liff.init({ liffId: "1655655249-B5D8vL7q" })
+            if (liff.isInClient()) {
+                getUserProfile()
+            } else {
+                if (liff.isLoggedIn()) {
+                    getUserProfile()
+                    document.getElementById("btnLogIn").style.display = "none"
+                    document.getElementById("btnLogOut").style.display = "block"
+                } else {
+					liff.login();
+                    document.getElementById("btnLogIn").style.display = "block"
+                    document.getElementById("btnLogOut").style.display = "none"
+                }
+            }
+        }
+        main()
+    </script>
+</body>
+
+</html>

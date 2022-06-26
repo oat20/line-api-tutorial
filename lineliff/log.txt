@@ -1,0 +1,6 @@
+{"events":[{"type":"message","replyToken":"1a372cf49746408db6717f8a4a035d8d","source":{"userId":"U8e04b347cca1501d0b13b33fcfeb0610","type":"user"},"timestamp":1618802447161,"mode":"active","message":{"type":"text","id":"13911717480991","text":"hi"}}],"destination":"U1b5d0d540ada393e11ad0b6aabf064c6"}
+{"events":[{"type":"message","replyToken":"4438713b5950439e928f6f4eda69dba5","source":{"userId":"U8e04b347cca1501d0b13b33fcfeb0610","type":"user"},"timestamp":1618802672381,"mode":"active","message":{"type":"text","id":"13911734969333","text":"hi"}}],"destination":"U1b5d0d540ada393e11ad0b6aabf064c6"}
+
+
+
+

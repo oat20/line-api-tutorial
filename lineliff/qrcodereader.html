@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Reader</title>
+</head>
+
+<body>
+    <h3 id="result">Something is going to happen here...</h3>
+    <button onclick="scanCodeV2()">QR Code Reader</button>
+
+    <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <!-- <script src="./node_modules/@line/bot-sdk/dist/index.js"></script> -->
+    <script>
+        async function scanCodeV2() {
+            try {
+                const result = await liff.scanCodeV2();
+                document.querySelector('#result').innerHTML = result.value;
+            } catch (error) {
+                console.log('scanCodeV2', error);
+            }
+        }
+        async function main() {
+            await liff.init({ liffId: '1655655249-EP27XLVG' });
+            if (!liff.isLoggedIn()) {
+                liff.login();
+            }
+        }
+        main();
+    </script>
+</body>
+
+</html>
